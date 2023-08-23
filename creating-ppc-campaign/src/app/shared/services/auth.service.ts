@@ -7,7 +7,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { login, loginSuccess, logout } from 'src/app/store/auth/user.action';
+import { login, loginSuccess, logout, logoutFailure } from 'src/app/store/auth/user.action';
 import { Store } from '@ngrx/store';
 @Injectable({
   providedIn: 'root',
@@ -33,7 +33,8 @@ export class AuthService {
       } else {
         // User is not logged in
         // Dispatch logout or other cleanup logic
-        this.store.dispatch(logout());
+        const error = "user is not logged in";
+        this.store.dispatch(logoutFailure({error:error}));
       }
     });
 

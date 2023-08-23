@@ -4,12 +4,12 @@
             <h6 class="text-end dp-inline">{{ user?.email }}</h6>
         </div>
         <div class="col-2 my-auto">
-            <p class="text-end dp-inline" *ngIf="!user">
-                <a class="href">
+            <p class="text-end dp-inline" *ngIf="!user.email">
+                <a href="login">
                     <button type="button" class="btn btn-primary">login</button>
                 </a>
             </p>
-            <p class="text-end dp-inline" *ngIf="user">
+            <p class="text-end dp-inline" *ngIf="user.email">
                 <a class="href">
                     <button (click)="logout()" type="button"   class="btn btn-primary">logout</button>
                 </a>

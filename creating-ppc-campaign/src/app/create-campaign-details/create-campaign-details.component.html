@@ -4,10 +4,10 @@
 </div>
 <div>
 
-    <form>
+    <form [formGroup]="campaignForm" >
         <div class="form-group mb-4">
           <label for="exampleInputEmail1 " class="mb-2 text-primary">Campaign Name</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example: Holiday Favorites">
+          <input type="email" formControlName="campaignName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Example: Holiday Favorites">
        
         </div>
         <div class="form-group mb-4">
@@ -18,7 +18,7 @@
                     <span class="input-group-text">$</span>
                 </div>
                 
-            <input type="text" class="form-control" placeholder="0.00" />
+            <input formControlName="dailyBudget" type="text" class="form-control" placeholder="0.00" />
             </div>
     
         </div>
@@ -29,7 +29,7 @@
 
                     <label class="d-block mb-2 text-primary" for="exampleInputEmail1">Start date</label>
         
-                    <input type="date" name="begin" 
+                    <input formControlName="startDate" type="date" name="begin" 
                     placeholder="dd-mm-yyyy" value=""
                     >
                 </div>
@@ -40,7 +40,7 @@
                     
                     End Date</label>
         
-                <input type="date" name="begin" 
+                <input formControlName="endDate" type="date" name="begin" 
                 placeholder="dd-mm-yyyy" value=""
                 >
         
