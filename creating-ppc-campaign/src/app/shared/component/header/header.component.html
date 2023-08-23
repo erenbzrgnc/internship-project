@@ -1,0 +1,19 @@
+<div class="w-100" *ngIf="user$ | async as user">
+    <div class="row justify-content-end">
+        <div class="col-2 my-auto">
+            <h6 class="text-end dp-inline">{{ user?.email }}</h6>
+        </div>
+        <div class="col-2 my-auto">
+            <p class="text-end dp-inline" *ngIf="!user">
+                <a class="href">
+                    <button type="button" class="btn btn-primary">login</button>
+                </a>
+            </p>
+            <p class="text-end dp-inline" *ngIf="user">
+                <a class="href">
+                    <button (click)="logout()" type="button"   class="btn btn-primary">logout</button>
+                </a>
+            </p>
+        </div>
+    </div>
+</div>

@@ -7,46 +7,62 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { login, loginSuccess, logout } from 'src/app/store/auth/user.action';
+import { Store } from '@ngrx/store';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private store: Store
   ) {
-    /* Saving user data in localstorage when 
-    logged in and setting up null when logged out */
-    this.afAuth.authState.subscribe((user) => {
+
+    this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user')!);
+        // User is logged in
+        // Dispatch to your NgRx store or perform other logic here
+        const email = user.email;
+        const currentUser= {email:email, password:null, loginStatus: true};
+        this.store.dispatch(loginSuccess({user:currentUser}));
       } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        // User is not logged in
+        // Dispatch logout or other cleanup logic
+        this.store.dispatch(logout());
       }
     });
-  }
-  // Sign in with email/password
-  SignIn(email: string, password: string) {
-    return this.afAuth
-      .signInWithEmailAndPassword(email, password)
-      .then((result) => {
 
-        this.afAuth.authState.subscribe((user) => {
-          if (user) {
-            this.router.navigate(['choose-campaign']);
-          }
-        });
-      })
-      .catch((error) => {
-        window.alert(error.message);
-      });
+    
+
   }
+
+  
+  // Sign in with email/password
+  SignIn(email: string, password: string): Promise<User> {
+    return new Promise((resolve, reject) => {
+        this.afAuth
+            .signInWithEmailAndPassword(email, password)
+            .then((result) => {
+                console.log("result", result);
+                let loginStatus = result.user != null;
+                resolve({ email: email, password: null, loginStatus: loginStatus });
+            })
+            .catch((error) => {
+                console.log("error", error);
+                resolve({ email: email, password: null, loginStatus: false });
+                window.alert(error.message);
+                // If you want to return a User object even in case of an error, use resolve instead of reject
+                // Otherwise, you can just reject the promise
+                reject(error);  
+            });
+    });
+}
+
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
@@ -59,7 +75,7 @@ export class AuthService {
   // Sign out
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
+   
       this.router.navigate(['login']);
     });
   }

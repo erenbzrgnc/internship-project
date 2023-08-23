@@ -24,6 +24,8 @@ import { environment } from '../environments/environment';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {  HttpClientModule } from '@angular/common/http';
+import { LoginModule } from './login/login.module';
+import { HeaderComponent } from './shared/component/header/header.component';
 
 @NgModule({
   declarations: [
@@ -37,17 +39,20 @@ import {  HttpClientModule } from '@angular/common/http';
     KeywordComponent,
     AddKeywordsComponent,
     CampaignListComponent,
-    LoginComponent
+    LoginComponent,
+    HeaderComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    HttpClientModule
+    HttpClientModule,
+    LoginModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
