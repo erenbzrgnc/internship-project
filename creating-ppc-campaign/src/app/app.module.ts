@@ -1,9 +1,8 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
+import { ActionReducer, MetaReducer, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CampaignTypeComponent } from './campaign-type/campaign-type.component';
 import { CreateCampaignDetailsComponent } from './create-campaign-details/create-campaign-details.component';
@@ -26,6 +25,20 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import {  HttpClientModule } from '@angular/common/http';
 import { LoginModule } from './login/login.module';
 import { HeaderComponent } from './shared/component/header/header.component';
+import { CampaignTypeListModule } from './campaign-type-list/campaign-type-list.module';
+import { appReducer } from './store/app.reducer';
+import { localStorageSync } from 'ngrx-store-localstorage';
+
+// This will be called to configure syncing with localStorage
+export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
+  return localStorageSync({
+    keys: ['user', 'campaignTypes'],  // Replace with the keys of the slices of state you want to store
+    rehydrate: true,
+  })(reducer);
+}
+
+const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
+
 
 @NgModule({
   declarations: [
@@ -47,12 +60,13 @@ import { HeaderComponent } from './shared/component/header/header.component';
     AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(appReducer, { metaReducers }),
     EffectsModule.forRoot([]),
     ReactiveFormsModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     HttpClientModule,
     LoginModule,
+    CampaignTypeListModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

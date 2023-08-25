@@ -13,26 +13,24 @@ import { Store } from '@ngrx/store';
   providedIn: 'root',
 })
 export class AuthService {
-  userData: any; // Save logged in user data
+  userData: any; 
 
   constructor(
-    public afs: AngularFirestore, // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afs: AngularFirestore, 
+    public afAuth: AngularFireAuth, 
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public ngZone: NgZone, 
     private store: Store
   ) {
 
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        // User is logged in
-        // Dispatch to your NgRx store or perform other logic here
+
         const email = user.email;
         const currentUser= {email:email, password:null, loginStatus: true};
         this.store.dispatch(loginSuccess({user:currentUser}));
       } else {
-        // User is not logged in
-        // Dispatch logout or other cleanup logic
+
         const error = "user is not logged in";
         this.store.dispatch(logoutFailure({error:error}));
       }
@@ -57,19 +55,14 @@ export class AuthService {
                 console.log("error", error);
                 resolve({ email: email, password: null, loginStatus: false });
                 window.alert(error.message);
-                // If you want to return a User object even in case of an error, use resolve instead of reject
-                // Otherwise, you can just reject the promise
+
                 reject(error);  
             });
     });
 }
 
 
-  // Returns true when user is looged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user')!);
-    return user !== null ? true : false;
-  }
+
 
 
 

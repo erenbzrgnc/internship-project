@@ -9,11 +9,12 @@ import { AddKeywordsComponent } from './add-keywords/add-keywords.component';
 import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/guard/auth.guard';
+import { CampaignTypeResolver } from './resolver/campaigntype.resolver';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
-  { path: 'choose-campaign', component: CampaignTypeListComponent, canActivate: [AuthGuard]  },
+  { path: 'choose-campaign', component: CampaignTypeListComponent, canActivate: [AuthGuard],  resolve: { campaignTypes: CampaignTypeResolver }  },
   { path: 'details', component: CreateCampaignDetailsComponent },
   { path: 'product-ad-group', component: ProductAdGroupComponent },
   { path: 'keywords', component: KeywordListComponent },
