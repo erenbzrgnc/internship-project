@@ -8,9 +8,13 @@
 
 
 <div class="w-100 border-top border-bottom border-dark border-2 pt-3"> 
+<form [formGroup]="adGroupNameForm">
+
 
     <label class="d-block mb-1">Ad Group Name</label>
-    <input class="mb-4" type="text" />
+    <input formControlName="adGroupName" class="mb-4" type="text" />
+
+</form>
 
 </div>
 
@@ -25,22 +29,21 @@
 
 <div class="w-100 row mb-2 " style="margin-right: 0; margin-left: 0;" >
     <div class="col  border-bottom border-dark border-2 ">
-        <app-product-card ></app-product-card>
-     
-        <app-product-card></app-product-card>
-       
-        <app-product-card></app-product-card>
-        <app-product-card></app-product-card>
+  
+        <app-product-card *ngFor="let product of excludedPorducts$  | async" [product]="product" [included]="false"   (productAdded)="handleProductAdded($event)"
+        (productRemoved)="handleProductRemoved($event)" ></app-product-card>
+
     </div>
     <div class="vr" style="--bs-gutter-x:0.1rem; background-color: black; opacity: 100;"></div>
     <div class="col  border-2 border-bottom border-dark">
-        <app-product-card></app-product-card>
+        <app-product-card *ngFor="let product of includedPorducts$  | async" [product]="product" [included]="true"   (productAdded)="handleProductAdded($event)"
+  (productRemoved)="handleProductRemoved($event)" ></app-product-card>
 
     </div>
 
 </div>
 
-<div class="mt-4" > <div class="mr-2 d-inline" ><button class="btn btn btn-secondary " >Cancel</button> </div> <div class="d-inline m-3"> <a href="/keywords" ><button type="button" class="btn btn-primary">Continue Next Step</button></a> </div> </div>
+<div class="mt-4" > <div class="mr-2 d-inline" ><button class="btn btn btn-secondary " >Cancel</button> </div> <div class="d-inline m-3"> <a href="/keywords" ><button type="button" class="btn btn-primary" (click)="saveAdGroup()" >Continue Next Step</button></a>  </div> </div>
 
 
 

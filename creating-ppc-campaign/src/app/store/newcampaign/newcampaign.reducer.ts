@@ -1,6 +1,6 @@
 import { NewCampaign } from "src/app/model/new-campaign";
 import { createReducer, on } from "@ngrx/store";
-import { updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignTypeSuccess } from "./newcampaign.action";
+import { deleteNewCampaign, updateCampaignAdGroupName, updateCampaignAdGroupNameSuccess, updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignProductsSuccess, updateCampaignTypeSuccess } from "./newcampaign.action";
 
 
 export const initialState: NewCampaign = {
@@ -13,14 +13,13 @@ export const initialState: NewCampaign = {
         dailyBudget: 0,
         startDate: undefined,
         endDate: undefined
-    }
+    },
+    products: [
+
+    ],
+    adGroupName: ""
 }
-export const newCampaignDetail: NewCampaign["details"] = {
-    campaignName: "",
-    dailyBudget: 0,
-    startDate: undefined,
-    endDate: undefined
-}
+
 export const NewCampaignReducer = createReducer(
     initialState,
     on(updateCampaignDetailSuccess, (state, { Details }) => ({
@@ -36,5 +35,22 @@ export const NewCampaignReducer = createReducer(
             ...state.campaignType,
             ...campaignType
         }
+    })),
+    on(updateCampaignProductsSuccess, (state, { products }) => ({
+        ...state,
+        products: [
+
+            ...products
+        ]
+    })),
+    on(updateCampaignAdGroupNameSuccess, (state, { adGroupName }) => ({
+        ...state,
+        adGroupName: adGroupName
+    })),
+    on(deleteNewCampaign, (state) => ({
+        ...state,
+        ...initialState
     }))
+    
 );
+

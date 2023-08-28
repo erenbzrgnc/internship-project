@@ -10,13 +10,14 @@ import { CampaignListComponent } from './campaign-list/campaign-list.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { CampaignTypeResolver } from './resolver/campaigntype.resolver';
+import { ProductResolver } from './resolver/product.resolver';
 
 const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'choose-campaign', component: CampaignTypeListComponent, canActivate: [AuthGuard],  resolve: { campaignTypes: CampaignTypeResolver }  },
   { path: 'details', component: CreateCampaignDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'product-ad-group', component: ProductAdGroupComponent, canActivate: [AuthGuard] },
+  { path: 'product-ad-group', component: ProductAdGroupComponent, canActivate: [AuthGuard], resolve: {products: ProductResolver} },
   { path: 'keywords', component: KeywordListComponent, canActivate: [AuthGuard] },
   { path: 'add-keywords', component: AddKeywordsComponent, canActivate: [AuthGuard] },
   { path: 'all-campaigns', component: CampaignListComponent, canActivate: [AuthGuard] },

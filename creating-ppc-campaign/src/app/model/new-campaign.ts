@@ -1,3 +1,5 @@
+import { Product } from "./product";
+
 export interface NewCampaign {
     campaignType: {
         title: string;
@@ -9,4 +11,8 @@ export interface NewCampaign {
         startDate: Date;
         endDate: Date;
     };
+    
+    products: Product[];
+    adGroupName: string;
+    
 }

@@ -3,12 +3,16 @@
 <div class="col-10">
     <div class="row">
         <div class="col h-50">
-            Washable Pee Pads for Dogs (3-packs) Reusable Waterproof Potty
+            {{product.name}}
         </div>
         <div class="w-100"></div>
         <div class="col h-50">
-            33.45$ | In Stock | SKU: Pads_1010
-            <button class="btn btn-secondary">Add</button>
+            {{product.price}} | {{product.stockStatus}} | {{product.code}}
+            <button *ngIf="!included; else removeBlock" (click)="addProduct()" class="btn btn-secondary">Add</button>
+            <ng-template #removeBlock>
+                <button class="btn btn-danger" (click)="removeProduct()" >Remove</button>
+            </ng-template>
+            
     </div>
 
 </div>
