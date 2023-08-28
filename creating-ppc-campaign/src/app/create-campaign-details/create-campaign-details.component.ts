@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { updateCampaignDetail } from '../store/newcampaign/newcampaign.action';
 
 @Component({
   selector: 'app-create-campaign-details',
@@ -8,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class CreateCampaignDetailsComponent {
 
-  constructor() { }
+  constructor(private store: Store) { }
 
   campaignForm: FormGroup;
   ngOnInit(): void {
@@ -18,6 +20,10 @@ export class CreateCampaignDetailsComponent {
       "startDate": new FormControl(null, [Validators.required]),
       "endDate": new FormControl(null, [Validators.required]),
     });
+  }
+
+  submitDetails() {
+    this.store.dispatch(updateCampaignDetail({ Details: this.campaignForm.value }));
   }
 
 }

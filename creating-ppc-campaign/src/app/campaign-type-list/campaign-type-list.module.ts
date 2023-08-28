@@ -5,6 +5,8 @@ import { campaignTypeReducer } from '../store/campaign-type/campaign-type.reduce
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CampaignService } from '../services/campaign.service';
+import { NewCampaignEffect } from '../store/newcampaign/newcampaign.effect';
+import { NewCampaignReducer } from '../store/newcampaign/newcampaign.reducer';
 
 
 
@@ -13,7 +15,8 @@ import { CampaignService } from '../services/campaign.service';
   imports: [
     CommonModule,
     StoreModule.forFeature('campaignTypes', campaignTypeReducer),
-    EffectsModule.forFeature([CampaignTypeEffect])
+    StoreModule.forFeature('newCampaign', NewCampaignReducer),
+    EffectsModule.forFeature([CampaignTypeEffect, NewCampaignEffect])
     
   ]
 })

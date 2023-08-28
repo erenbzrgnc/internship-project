@@ -15,11 +15,11 @@ const routes: Routes = [
 
   { path: 'login', component: LoginComponent },
   { path: 'choose-campaign', component: CampaignTypeListComponent, canActivate: [AuthGuard],  resolve: { campaignTypes: CampaignTypeResolver }  },
-  { path: 'details', component: CreateCampaignDetailsComponent },
-  { path: 'product-ad-group', component: ProductAdGroupComponent },
-  { path: 'keywords', component: KeywordListComponent },
-  { path: 'add-keywords', component: AddKeywordsComponent },
-  { path: 'all-campaigns', component: CampaignListComponent },
+  { path: 'details', component: CreateCampaignDetailsComponent, canActivate: [AuthGuard] },
+  { path: 'product-ad-group', component: ProductAdGroupComponent, canActivate: [AuthGuard] },
+  { path: 'keywords', component: KeywordListComponent, canActivate: [AuthGuard] },
+  { path: 'add-keywords', component: AddKeywordsComponent, canActivate: [AuthGuard] },
+  { path: 'all-campaigns', component: CampaignListComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/choose-campaign', pathMatch: 'full' },
 
 
