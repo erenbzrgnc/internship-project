@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable, take } from 'rxjs';
 import { Keyword } from '../model/keyword';
 import { selectKeywords, selectNewCampaign} from "../store/newcampaign/newcampaign.selector"
-import { deleteKeyword, updateGivenKeyword } from '../store/newcampaign/newcampaign.action';
+import { deleteKeyword, deleteNewCampaign, updateGivenKeyword } from '../store/newcampaign/newcampaign.action';
 import { CampaignService } from '../services/campaign.service';
 import { Router } from '@angular/router';
 import { createCampaign } from '../store/campaigns/campaigns.action';
@@ -15,6 +15,8 @@ import { createCampaign } from '../store/campaigns/campaigns.action';
 
 })
 export class KeywordListComponent {
+
+  
   
     keywordList$: Observable<Keyword[]>; 
     constructor(private store: Store, private campaignService: CampaignService, private router: Router) {
@@ -38,6 +40,11 @@ export class KeywordListComponent {
     }
 
     saveCampaign() {
+
+      
+
+
+
       this.store.select(selectNewCampaign).pipe(
         take(1) // Take just one value from the observable and then unsubscribe
       ).subscribe(campaign => {
@@ -45,6 +52,7 @@ export class KeywordListComponent {
           
           console.log(res);
           this.store.dispatch(createCampaign({campaign: campaign}));
+          this.store.dispatch(deleteNewCampaign());
           this.router.navigate(['/all-campaigns']);
         }).catch(err => {
           console.log(err);

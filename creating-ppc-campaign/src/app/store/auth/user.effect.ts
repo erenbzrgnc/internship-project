@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { login, loginFailure, loginSuccess, logoutSuccess } from "./user.action";
 import { User } from "../../shared/services/user";
 import { Router } from '@angular/router';
+import { deleteNewCampaign } from "../newcampaign/newcampaign.action";
 
 
 @Injectable()
@@ -50,6 +51,7 @@ logout$ = createEffect(() => {
         ofType('[Logout] User Logout'),
         tap(() => {
             this.authService.SignOut();
+            this.store.dispatch(deleteNewCampaign());
             this.router.navigate(['login']);
         
             

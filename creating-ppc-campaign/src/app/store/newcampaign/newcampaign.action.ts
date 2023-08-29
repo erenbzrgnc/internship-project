@@ -71,3 +71,12 @@ export const updateGivenKeywordSuccess = createAction(
     '[New Campaign] Update Given Keyword Success',
     props<{keyword: NewCampaign["keywords"][0]}>()
 )
+
+export const deleteNewCampaign = createAction(
+    '[New Campaign] Delete New Campaign'
+)
+
+export const deleteNewCampaignSuccess = createAction(
+    '[New Campaign] Delete New Campaign Success'
+)
+

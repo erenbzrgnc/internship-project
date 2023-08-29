@@ -1,6 +1,6 @@
 import { NewCampaign } from "src/app/model/new-campaign";
 import { createReducer, on } from "@ngrx/store";
-import { deleteKeywordSuccess, updateCampaignAdGroupName, updateCampaignAdGroupNameSuccess, updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignProductsSuccess, updateCampaignTypeSuccess, updateGivenKeywordSuccess, updateKeywordsSuccess } from "./newcampaign.action";
+import { deleteKeywordSuccess, deleteNewCampaignSuccess, updateCampaignAdGroupName, updateCampaignAdGroupNameSuccess, updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignProductsSuccess, updateCampaignTypeSuccess, updateGivenKeywordSuccess, updateKeywordsSuccess } from "./newcampaign.action";
 
 
 export const initialState: NewCampaign = {
@@ -68,7 +68,12 @@ export const NewCampaignReducer = createReducer(
             }
             return k;
         })
-    }))
+    })),
+    on(deleteNewCampaignSuccess, () => initialState)
+
+
+    
+        
 
     
     

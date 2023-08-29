@@ -2,8 +2,36 @@
   <div class="row mb-2">
 
       <div class="col-6"> 
-          <label>Keyword</label>
-          <input formControlName="keyword"  type="text" class="w-100" /> 
+        <div>
+            <label>Keyword</label>
+            <input formControlName="keyword"  type="text" class="w-100" /> 
+
+        </div>
+        <ng-container *ngIf="suggestedBid$ |async as bidValue" >
+            <div class="d-inline-block ml-2"> <!-- Added some margin for spacing -->
+                <small class="text-primary" style="cursor: pointer;" >
+                    <u>
+                        <a (click)="setSuggestedBid(bidValue)">
+                            Set Suggested
+                        </a>
+
+                    </u>
+
+
+                    
+                </small>
+                <small  >| Suggested Bid: 
+                  
+                            {{ bidValue }}
+                     
+
+
+               
+
+                </small> 
+            </div>
+        </ng-container>
+
       </div>
 
       <div class="col-2">  

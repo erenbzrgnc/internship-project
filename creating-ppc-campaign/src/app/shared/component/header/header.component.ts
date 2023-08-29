@@ -19,6 +19,7 @@ export class HeaderComponent {
    logout() {
     
     this.store.dispatch(logout());
+  
    }
 
 }

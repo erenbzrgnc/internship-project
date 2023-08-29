@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignType, updateCampaignTypeSuccess, updateCampaignAdGroupName, updateCampaignProducts, updateCampaignProductsSuccess, updateCampaignAdGroupNameSuccess, updateKeywords, updateKeywordsSuccess, deleteKeyword, deleteKeywordSuccess, updateGivenKeyword, updateGivenKeywordSuccess } from "./newcampaign.action";
+import { updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignType, updateCampaignTypeSuccess, updateCampaignAdGroupName, updateCampaignProducts, updateCampaignProductsSuccess, updateCampaignAdGroupNameSuccess, updateKeywords, updateKeywordsSuccess, deleteKeyword, deleteKeywordSuccess, updateGivenKeyword, updateGivenKeywordSuccess, deleteNewCampaign, deleteNewCampaignSuccess} from "./newcampaign.action";
 import { map, mergeMap } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class NewCampaignEffect {
@@ -88,6 +88,18 @@ export class NewCampaignEffect {
     }
 
     );
+
+    deleteNewCampaign$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(deleteNewCampaign),
+            map((action) => {
+                console.log(action);
+                return deleteNewCampaignSuccess();
+            })
+        );
+            }
+        );
+
 
 
 
