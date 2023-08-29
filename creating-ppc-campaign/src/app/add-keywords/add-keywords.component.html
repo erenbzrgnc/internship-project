@@ -2,7 +2,9 @@
 <div class="w-100"> <h2>Add Keywords</h2> </div>
 <div class="mb-4" > <p>Add the keywords as a separate line for each</p></div>
 <div class="mb-4">
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+    <form [formGroup]="keywordsForm">
+        <textarea class="form-control" formControlName="keywords" id="exampleFormControlTextarea1" rows="7"></textarea>
+    </form>
 </div>
 <div class="w-100 border-dark border  mb-4" ></div>
 
@@ -11,6 +13,9 @@
         <button class="btn btn-secondary w-100" >Cancel</button>
     </div>
     <div class="col-2">
-        <button class="btn btn-primary w-100" > Save </button>
+        <a href="keywords">
+            <button class="btn btn-primary w-100" (click)="save()" > Save </button>
+        </a>
+
     </div>
 </div>

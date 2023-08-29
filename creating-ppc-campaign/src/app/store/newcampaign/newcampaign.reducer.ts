@@ -1,6 +1,6 @@
 import { NewCampaign } from "src/app/model/new-campaign";
 import { createReducer, on } from "@ngrx/store";
-import { deleteNewCampaign, updateCampaignAdGroupName, updateCampaignAdGroupNameSuccess, updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignProductsSuccess, updateCampaignTypeSuccess } from "./newcampaign.action";
+import { deleteKeywordSuccess, updateCampaignAdGroupName, updateCampaignAdGroupNameSuccess, updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignProductsSuccess, updateCampaignTypeSuccess, updateGivenKeywordSuccess, updateKeywordsSuccess } from "./newcampaign.action";
 
 
 export const initialState: NewCampaign = {
@@ -17,7 +17,10 @@ export const initialState: NewCampaign = {
     products: [
 
     ],
-    adGroupName: ""
+    adGroupName: "",
+    keywords: [ ],
+    stats:{"impression": 7.652, "clicks":1.375, "ACoS": 12.20},
+    status: "running"   
 }
 
 export const NewCampaignReducer = createReducer(
@@ -47,10 +50,27 @@ export const NewCampaignReducer = createReducer(
         ...state,
         adGroupName: adGroupName
     })),
-    on(deleteNewCampaign, (state) => ({
+    on(updateKeywordsSuccess, (state, { keywords }) => ({
         ...state,
-        ...initialState
+        keywords: [
+            ...keywords
+        ]
+    })),
+    on(deleteKeywordSuccess, (state, { keyword }) => ({
+        ...state,
+        keywords: state.keywords.filter(k => k.keyword !== keyword.keyword)
+    })),
+    on(updateGivenKeywordSuccess, (state, { keyword }) => ({
+        ...state,
+        keywords: state.keywords.map(k => {
+            if(k.keyword === keyword.keyword) {
+                return keyword;
+            }
+            return k;
+        })
     }))
+
+    
     
 );
 

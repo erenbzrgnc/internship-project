@@ -1,4 +1,6 @@
+import { Keyword } from "./keyword";
 import { Product } from "./product";
+import { Stats } from "./stats";
 
 export interface NewCampaign {
     campaignType: {
@@ -14,5 +16,8 @@ export interface NewCampaign {
     
     products: Product[];
     adGroupName: string;
+    keywords: Keyword[];
+    stats:Stats;
+    status: string;
     
 }

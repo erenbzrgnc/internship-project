@@ -1,15 +1,29 @@
-<div class="row mb-2">
-    <div class="col-6"> <label>Keyword</label><input type="text" class="w-100" /> </div>
-    <div class="col-2">  <label>Match Type</label>                 <div class="dropdown w-100">
-        <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Broad
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div></div>
-    <div class="col-3"> <label>Bid</label> <input type="text" class="w-100" /> </div>
-    <div class="col-1"> <button type="button" class="btn btn-danger mt-3">X</button>  </div>
-</div>
+<form [formGroup]="keywordForm">
+  <div class="row mb-2">
+
+      <div class="col-6"> 
+          <label>Keyword</label>
+          <input formControlName="keyword"  type="text" class="w-100" /> 
+      </div>
+
+      <div class="col-2">  
+          <label>Match Type</label>                 
+          <select formControlName="matchType" class="form-control ">
+              <option value="broad">Broad</option>
+              <option value="exact">Exact</option>
+
+          </select>
+      </div>
+
+      <div class="col-3"> 
+          <label>Bid</label> 
+          <input formControlName="bid" type="double" class="w-100" /> 
+      </div>
+
+      <div class="col-1"> 
+          <!-- If this button is supposed to remove the form, you can bind a method to it -->
+          <button type="button" (click)="removeKeyword()" class="btn btn-danger mt-3">X</button>  
+      </div>
+
+  </div>
+</form>

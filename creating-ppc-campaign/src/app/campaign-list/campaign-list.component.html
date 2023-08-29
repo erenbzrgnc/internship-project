@@ -51,60 +51,22 @@
                   </tr>
             </thead>
             <tbody>
-                <tr>
+              <ng-container *ngIf="campaignList$ | async as campaigns">
+                <ng-container *ngFor="let campaign of campaigns">
+                  <tr>
                     <th scope="row"><input class="form-check-input border border-dark" type="checkbox" value="" id="flexCheckDefault"></th>
-                    <td>Holiday Favorites</td>
-                    <td>Running</td>
-                    <td>04/24/2023</td>
-                    <td>05/24/2023</td>
-                    <td>7,653</td>
-                    <td>1,375</td>
-                    <td>12.20%</td>
+                    <td>{{ campaign.details.campaignName }}</td>
+                    <td>{{ campaign.status }}</td>
+                    <td>{{ campaign.details.startDate | date }}</td>
+                    <td>{{ campaign.details.endDate | date }}</td>
+                    <td>{{ campaign.stats.impression }}</td>
+                    <td>{{ campaign.stats.clicks }}</td>
+                    <td>{{ campaign.stats.ACoS }}%</td>
                   </tr>
+                </ng-container>
+              </ng-container>
 
-                  <tr>
-                    <th scope="row"><input class="form-check-input border border-dark" type="checkbox" value="" id="flexCheckDefault"></th>
-                    <td>Holiday Favorites</td>
-                    <td>Running</td>
-                    <td>04/24/2023</td>
-                    <td>05/24/2023</td>
-                    <td>7,653</td>
-                    <td>1,375</td>
-                    <td>12.20%</td>
-                  </tr>
 
-                  <tr>
-                    <th scope="row"><input class="form-check-input border border-dark" type="checkbox" value="" id="flexCheckDefault"></th>
-                    <td>Holiday Favorites</td>
-                    <td>Running</td>
-                    <td>04/24/2023</td>
-                    <td>05/24/2023</td>
-                    <td>7,653</td>
-                    <td>1,375</td>
-                    <td>12.20%</td>
-                  </tr>
-                  
-                  <tr>
-                    <th scope="row"><input class="form-check-input border border-dark" type="checkbox" value="" id="flexCheckDefault"></th>
-                    <td>Holiday Favorites</td>
-                    <td>Running</td>
-                    <td>04/24/2023</td>
-                    <td>05/24/2023</td>
-                    <td>7,653</td>
-                    <td>1,375</td>
-                    <td>12.20%</td>
-                  </tr>
-                  
-                  <tr>
-                    <th scope="row"><input class="form-check-input border border-dark" type="checkbox" value="" id="flexCheckDefault"></th>
-                    <td>Holiday Favorites</td>
-                    <td>Running</td>
-                    <td>04/24/2023</td>
-                    <td>05/24/2023</td>
-                    <td>7,653</td>
-                    <td>1,375</td>
-                    <td>12.20%</td>
-                  </tr>
             </tbody>
             <tfoot>
                 <tr>
@@ -113,9 +75,9 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">20,343,45</div></td>
-                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">5,334</div></td>
-                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">20,50%</div></td>
+                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">{{ totalImpressions | number }}</div></td>
+                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">{{ totalClicks | number }}</div></td>
+                    <td><div class="border border-2 border-light d-inline p-1 bg-light rounded">{{ totalACoS | number:'1.2-2' }}%</div></td>
 
                 
                   </tr>

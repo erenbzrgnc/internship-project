@@ -40,10 +40,34 @@ export const updateCampaignAdGroupNameSuccess = createAction(
     '[New Campaign] Update Campaign Ad Group Name Success',
     props<{adGroupName: NewCampaign["adGroupName"]}>()
 )
-export const deleteNewCampaign = createAction(
-    '[New Campaign] Delete New Campaign'
+
+export const updateKeywords = createAction(
+    '[New Campaign] Update Keywords',
+    props<{keywords: NewCampaign["keywords"]}>()
 )
 
-export const deleteNewCampaignSuccess = createAction(
-    '[New Campaign] Delete New Campaign Success'
+export const updateKeywordsSuccess = createAction(
+    '[New Campaign] Update Keywords Success',
+    props<{keywords: NewCampaign["keywords"]}>()
+)
+
+export const deleteKeyword = createAction(
+    '[New Campaign] Delete Keyword',
+    props<{keyword: NewCampaign["keywords"][0]}>()
+
+)
+
+export const deleteKeywordSuccess = createAction(
+    '[New Campaign] Delete Keyword Success',
+    props<{keyword: NewCampaign["keywords"][0]}>()
+)
+
+export const updateGivenKeyword = createAction(
+    '[New Campaign] Update Given Keyword',
+    props<{keyword: NewCampaign["keywords"][0]}>()
+)
+
+export const updateGivenKeywordSuccess = createAction(
+    '[New Campaign] Update Given Keyword Success',
+    props<{keyword: NewCampaign["keywords"][0]}>()
 )

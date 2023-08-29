@@ -30,11 +30,13 @@ import { appReducer } from './store/app.reducer';
 import { localStorageSync } from 'ngrx-store-localstorage';
 import { CampaignTypeModule } from './campaign-type/campaign-type.module';
 import { ProductAdGroupModule } from './product-ad-group/product-ad-group.module';
+import { AddKeywordsModule } from './add-keywords/add-keywords.module';
+import { CampaignListModule } from './campaign-list/campaign-list.module';
 
 // This will be called to configure syncing with localStorage
 export function localStorageSyncReducer(reducer: ActionReducer<any>): ActionReducer<any> {
   return localStorageSync({
-    keys: ['user', 'campaignTypes', 'newCampaign', 'products'],  // Replace with the keys of the slices of state you want to store
+    keys: ['user', 'campaignTypes', 'newCampaign', 'products', "campaigns"],  // Replace with the keys of the slices of state you want to store
     rehydrate: true,
   })(reducer);
 }
@@ -70,7 +72,9 @@ const metaReducers: Array<MetaReducer<any, any>> = [localStorageSyncReducer];
     LoginModule,
     CampaignTypeListModule,
     CampaignTypeModule,
-    ProductAdGroupModule
+    ProductAdGroupModule,
+    AddKeywordsModule,
+    CampaignListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

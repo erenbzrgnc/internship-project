@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignType, updateCampaignTypeSuccess, deleteNewCampaign, updateCampaignAdGroupName, updateCampaignProducts, updateCampaignProductsSuccess, updateCampaignAdGroupNameSuccess } from "./newcampaign.action";
+import { updateCampaignDetail, updateCampaignDetailSuccess, updateCampaignType, updateCampaignTypeSuccess, updateCampaignAdGroupName, updateCampaignProducts, updateCampaignProductsSuccess, updateCampaignAdGroupNameSuccess, updateKeywords, updateKeywordsSuccess, deleteKeyword, deleteKeywordSuccess, updateGivenKeyword, updateGivenKeywordSuccess } from "./newcampaign.action";
 import { map, mergeMap } from "rxjs";
 @Injectable({ providedIn: 'root' })
 export class NewCampaignEffect {
@@ -20,6 +20,7 @@ export class NewCampaignEffect {
         return this.actions$.pipe(
             ofType(updateCampaignType),
             map((action) => {
+                
                 return updateCampaignTypeSuccess({ campaignType: action.campaignType});
             })
             
@@ -49,16 +50,46 @@ export class NewCampaignEffect {
 
     );
 
-    deleteNewCampaign$ = createEffect(() => {
+    updateKeywords$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType(updateCampaignType),
+            ofType(updateKeywords),
             map((action) => {
-                return deleteNewCampaign();
+                console.log(action);
+                return updateKeywordsSuccess({ keywords: action.keywords});
             })
-            
+
         );
     }
+
+    );  
+
+    deleteKeyword$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(deleteKeyword),
+            map((action) => {
+                console.log(action);
+                return deleteKeywordSuccess({ keyword: action.keyword});
+            })
+
+        );
+    }
+    
     );
+
+    updateGivenKeyword$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(updateGivenKeyword),
+            map((action) => {
+                console.log(action);
+                return updateGivenKeywordSuccess({ keyword: action.keyword});
+            })
+
+        );
+    }
+
+    );
+
+
 
 
 

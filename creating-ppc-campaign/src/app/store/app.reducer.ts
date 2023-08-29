@@ -8,11 +8,13 @@ import * as fromNewCampaign from "../store/newcampaign/newcampaign.reducer";
 import { NewCampaign } from '../model/new-campaign';
 import { Product } from '../model/product';
 import * as fromProducts from '../store/products/products.reducer';
+import * as fromCampaigns from '../store/campaigns/campaigns.reducer';
 export interface AppState {
   user: User;
   campaignTypes: CampaignType[];
   newCampaign: NewCampaign;
   products: Product[]
+  campaigns: NewCampaign[];
 }
 
 export const appReducer: ActionReducerMap<AppState> = {
@@ -20,5 +22,6 @@ export const appReducer: ActionReducerMap<AppState> = {
   user: fromUser.userReducer,
   campaignTypes: fromCampaignType.campaignTypeReducer,
   newCampaign: fromNewCampaign.NewCampaignReducer,
-  products: fromProducts.productsReducer
+  products: fromProducts.productsReducer,
+  campaigns: fromCampaigns.campaignReducer
 };
