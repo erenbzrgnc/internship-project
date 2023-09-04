@@ -43,7 +43,6 @@
 
     <app-keyword (keywordChanged)="handleKeywordChanged($event)" (keywordRemoved)="handleKeywordRemoved($event)" *ngFor="let keyword of keywordList$  | async"  [keyword]="keyword" ></app-keyword>
 
-
     
 </div>
 
@@ -54,9 +53,13 @@
     <div class="col" >
         <button class="btn btn-secondary" >Cancel</button>
     </div>
-    <div class="col">
+    <div *ngIf="(saveButton$|async)"  class="col">
+        <button  (click)="triggerSaveKeywordsFromParent()" class="btn btn-outline-success custom-green-button">Save All</button>
 
-            <button (click)="saveCampaign()" class="btn btn-primary" > Continue Next Step </button>
+    </div>
+    <div *ngIf="!(saveButton$|async)"  class="col">
+
+            <button   (click)="saveCampaign()" class="btn btn-primary"  > Continue Next Step </button>
  
 
     </div>

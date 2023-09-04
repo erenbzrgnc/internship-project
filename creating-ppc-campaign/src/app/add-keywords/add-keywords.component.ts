@@ -32,7 +32,7 @@ export class AddKeywordsComponent {
             return {
                 keyword: keyword,
                 matchType: 'broad', // Your arbitrary value
-                bid: 0 // Your arbitrary value
+                bid: null // Your arbitrary value
             } as Keyword;
         });
 

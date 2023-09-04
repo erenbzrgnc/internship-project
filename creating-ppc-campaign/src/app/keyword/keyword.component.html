@@ -48,10 +48,23 @@
           <input formControlName="bid" type="double" class="w-100" /> 
       </div>
 
-      <div class="col-1"> 
+
+
+      <div class="col-1 " > 
           <!-- If this button is supposed to remove the form, you can bind a method to it -->
-          <button type="button" (click)="removeKeyword()" class="btn btn-danger mt-3">X</button>  
+
+          <button type="button" (click)="removeKeyword()" class="btn btn-danger mt-3  "style="margin-right: 10px;">X</button> 
+          <!--
+
+          <ng-container *ngIf="(saveButton$|async)">
+            <button type="button" (click)="saveKeyword()" class="btn btn-outline-success custom-green-button mt-3">Save</button>
+        </ng-container>
+          -->
+
+        
       </div>
+
+
 
   </div>
 </form>

@@ -53,6 +53,7 @@ export const NewCampaignReducer = createReducer(
     on(updateKeywordsSuccess, (state, { keywords }) => ({
         ...state,
         keywords: [
+            ...state.keywords,
             ...keywords
         ]
     })),
